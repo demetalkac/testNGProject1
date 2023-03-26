@@ -1,0 +1,14 @@
+
+<suite name="Blue Rental Car Project" verbose="1" >
+    <!--    lsteners ("techproed.utilities.ListenersRetryAnalyzer") ekledim cunku fail olan test leri bi daha
+            calıstırsın diye   -->
+    <listeners>
+        <listener class-name="techproed.utilities.ListenersRetryAnalyzer"></listener>
+    </listeners>
+    <test name="Regression Test">
+        <packages>
+            <!--            run all packages that has @Test annotation-->
+            <package name="techproed.*"/>
+        </packages>
+    </test>
+</suite>
