@@ -11,9 +11,9 @@ public class Day16_Annotations {
    @Test(enabled = false) :Disable the test case. By default enable=true.
       "enabled = false" bu testi kullanma,calıstırma anlamında.Testleri calıstırınca hic goremeyiz,daha guclu
       bir kullanım "@Ignore"a gore. "@Test(enabled = false)" bu sekilde kullandıgımızda @Test'i run yapan isarette
-      ortadan kalkar.
+      ortadan kalkar.Bunu genellikle sirkette bir method artık kullanılmıyor ama silerek sorumluluk almak istemedigimizde kullanrz.
     @Test(priority=number) : prioritize/order test case execution.
-    NOTE: Tests that has no priority parameter has a priority of 0. Test(priority=0)
+    NOTE: Tests that has no priority parameter has a priority of 0. Test(priority=0).yani priority verilmediyse dafoultu 0'dır zaten
     TestNG test cases runs in alphabetical order by default.
     We should use priority when there are multible test cases in the same class
     -3, 0(ALSO TESTS WITH NO PRIORITY), 4, 9

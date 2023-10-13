@@ -31,6 +31,9 @@ public class Day16_DependsOnMethods {
  -Normalde 2 test arasında conection cok kullanılmaz fakat 2 test case birbiriyle cok iliskili ise baglantı kurulabilir.
  - Bunun yerine aynı test case icinde kullanmak,eger üsteki gecemez ise digeri calısmaz.Fakat test caseler cok büyük ise ayrı ayrı olusturup,aralarında baglantı kurulabilir böyle.
 
+
+  ** TestNG de tüm @Test() methodlar birbirinden bagımsız olarak calısırlar.
+      Eger methodları bagımlı hale getirmek istersem. dependsOnMethods parametresi kullanılır.
   */
 
 }

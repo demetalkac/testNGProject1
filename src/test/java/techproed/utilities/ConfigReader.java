@@ -6,7 +6,7 @@ import java.util.Properties;
 public class ConfigReader {
 
     //This class reads the configuration.properties file
-    //Create Properties instance-property file’ı okumak için properti objecsi kullanılır
+    //Create Properties instance-property file’ı okumak için property objecsi kullanılır
     private static Properties properties;
 //  static block : ilk "static block" calısır
     static {
@@ -15,7 +15,7 @@ public class ConfigReader {
         try {
             //Opening configuration.properties file using FileInputStream
             FileInputStream fileInputStream = new FileInputStream(path);
-            //properties objesini instantiate8deger atamak) ediyoruz
+            //properties objesini instantiate(deger atamak) ediyoruz
             properties = new Properties();
             //configuration.properties dosyasında olan dataları yukleme yapar
             properties.load(fileInputStream);
@@ -30,7 +30,7 @@ public class ConfigReader {
 
     //This method will get the key from properties file,
     //And return the value as String
-    //We create this method to read the file
+    //We create this method to read the file -bu methodu configuration"daki koydugumuz bilgileri almak icin olusturduk. strink bir key giriyoruz
     //Yani bu method configuration.properties'in icine koyduklarımızı key-value olarak alabilmemize yarar.
     // Ornek:ConfigReader.gertProperty("browser"); ->chrome
     public static String getProperty(String key){

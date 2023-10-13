@@ -1,7 +1,7 @@
 package techproed.tests.paralleltesting;
 
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+//.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +14,7 @@ public class Day22_SearchItem {
 
     @Test
     public void googleSearch() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
+       // WebDriverManager.chromedriver().setup();
         WebDriver driver=new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
@@ -31,7 +31,7 @@ public class Day22_SearchItem {
     }
     @Test
     public void ebaySearch() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
+        //WebDriverManager.chromedriver().setup();
         WebDriver driver=new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
@@ -43,7 +43,7 @@ public class Day22_SearchItem {
     }
     @Test
     public void amazonSearch() throws InterruptedException {
-        WebDriverManager.chromedriver().setup();
+        //WebDriverManager.chromedriver().setup();
         WebDriver driver=new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));

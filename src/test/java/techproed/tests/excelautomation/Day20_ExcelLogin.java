@@ -11,6 +11,7 @@ import techproed.utilities.ReusableMethods;
 import java.util.List;
 import java.util.Map;
 public class Day20_ExcelLogin {
+    //not:exceli smoke test icinde kullanacagız, excelden verileri sırayla test edecegz.
     BlueRentalHomePage homePage;
     BlueRentalLoginPage loginPage;
     ExcelUtils excelUtils;  // "ExcelUtils" classından constructor cagırmak icin olusturduk.

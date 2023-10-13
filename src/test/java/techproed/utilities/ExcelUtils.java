@@ -13,7 +13,7 @@ public class ExcelUtils {
     private Workbook workBook;
     private Sheet workSheet;
     private String path;
-//CONSTRUCTOR
+//CONSTRUCTOR: Excel path'i ve sayfaya ulasmak icin kullanılır
     public ExcelUtils(String path, String sheetName) {//This Constructor is to open and access the excel file
         this.path = path;
         try {
@@ -23,7 +23,7 @@ public class ExcelUtils {
             workBook = WorkbookFactory.create(fileInputStream);
             //getting the worksheet
             workSheet = workBook.getSheet(sheetName);
-            //asserting if sheet has data or not
+            //asserting if sheet has data or not/ dosya bulunamazsa asagıdaki yazıyı verecek.
             Assert.assertNotNull(workSheet, "Worksheet: \"" + sheetName + "\" was not found\n");
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -32,7 +32,7 @@ public class ExcelUtils {
 
     //This will get the list of the data in the excel file
     //This is a list of map of string. This takes the data as string and will return the data as a Map of String
-    //Bu methot exceldeki verileri List olarak almamızı saglar
+    //Bu methot exceldeki verileri List olarak almamızı saglar.Bu methodu test sınıfında exceldeki verileri almak icin kullanacaz.
     public List<Map<String, String>> getDataList() {
         // getting all columns
         List<String> columns = getColumnsNames();

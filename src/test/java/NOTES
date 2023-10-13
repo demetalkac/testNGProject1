@@ -1,0 +1,275 @@
+ PROJECT SET UP
+ * Create Project: File -> New -> Project-> Select maven -> click next
+ -*Name: testNGProject->finish->click on EnableAutoImport(if you see)
+ *Create a package under java: techproed
+ *Under techproed create 3 packages
+            - tests -> Right click on techproed package : techproed.tests
+             -utilities -> Right click on  techproed package: techproed.utilities
+             -pages-> Right click on techproed package : techproed.pages
+             NOT:altalta olusturdugumuz packages'ler düzgün gözükmüyorsa
+                 ayarlara gir ve "flatten package" yazan yeri ve "compact middle package"i uncheck yap
+ *Add the dependencies on you pom.xml file:
+       - Get the dependencies mvnrepository.com
+        -selenium java
+        -webdrivermanager
+         -testNG
+ *Right click on tests package and create a java class.TestNGAnnotation
+     ***************
+     -TestNG is open source where NG stands for new generation.
+     -It is the newer version of JUnit which is another simpler tool.
+     -TestNG works only with JAVA and requires JDK 7 or higher
+     - TestNG official documentation is here:
+     - https://testng.org/doc/documentation-main.html**
+-------
+     WHY TESTNG?
+     - TestNG simply give more control to testers and makes testing effective.
+     - Prioritizing test cases.
+     -Multiple before and after annotations.
+                Good control the flow of the test execution.
+                Same test method can be used multiple times.
+     - Grouping test cases.
+                 Dependent  methods/groups.
+     *Parallel testing
+           -Multi thread execution. Runs from multiple methods at the same time.
+            -TestNG is thread safe that enables parallel testing to reduce test execution time.
+   ************
+    suite > test > group > class > method
+       @Test : creates test case
+       @Before and @After : 5 before and 5 after annotations. The are used to control FLOW and DESIGN of the tests
+          (@BeforeSuite, @BeforeClass, @BeforeTest, @BeforeMethod, @BeforeGroups)
+       @Ignore  :skip test case
+       @Test(enabled = false) :Disable the test case. By default enable=true.
+          "enabled = false" bu testi kullanma,calıstırma anlamında.Testleri calıstırınca hic goremeyiz,daha guclu
+          bir kullanım "@Ignore"a gore. "@Test(enabled = false)" bu sekilde kullandıgımızda @Test'i run yapan isarette
+          ortadan kalkar.Bunu genellikle sirkette bir method artık kullanılmıyor ama silerek sorumluluk almak istemedigimizde kullanrz.
+        @Test(priority=number) : prioritize/order test case execution.
+        NOTE: Tests that has no priority parameter has a priority of 0. Test(priority=0).yani priority verilmediyse dafoultu 0'dır zaten
+        TestNG test cases runs in alphabetical order by default.
+        We should use priority when there are multible test cases in the same class
+        -3, 0(ALSO TESTS WITH NO PRIORITY), 4, 9
+        **
+        “@DEPENDSONMETHODS “
+
+        @dependsOnMethods
+        -This annotation is used to make one method depends on the other method.
+        -In the example, searchTest method is depends on homePage method. It means, searchTest will run if homePage passes.
+        -It means searchTest will not run (searchTest will be ignored)if homePage fails.
+        -If we run only searchTest method, testNG will run hopePage method first. If homePage passes, then searchTest will be executed
+        --
+       	➢  Bu yontem, bir metodun diğer bir metoda
+        bağlı olmasını sağlamak için kullanılır.
+       	➢  Yandaki ornekte, homePage metdod’u searchTest method’una bağlıdır. Yani, homePage başarılı olursa searchTest de çalisacaktir.
+        ➢ Diger durumda yani, homePage başarısız olursa searchTest ignore edilecek, hic çalismayacaktir.
+        ➢ Yalnızca searchTest method’unu çalıştırırsak bile, TestNG önce homePage metodunu çalıştırır. homePage başarılı olursa searchTest calistirilir
+        ➢ Ustteki madde sadece 2 method icin gecerlidir. 3 method’u birbirine baglayip 3.method’u calistirirsaniz, 1.method’a kadar gitmez.
+
+       -
+      ** TestNG de tüm @Test() methodlar birbirinden bagımsız olarak calısırlar.
+         Eger methodları bagımlı hale getirmek istersem. dependsOnMethods parametresi kullanılır
+                  ***
+        @BeforeSuite :Her bir test suite'den once 1 kere calısır
+        @AfterSuite :Her bir test suite'den sonra 1 kere calısır
+
+        @BeforeTest :Her bir test'den(test case ile karıstırmamalı,test set gibi) once 1 kere calısır
+        @AfterTest  :Her bir test'den(test case ile karıstırmamalı,test set gibi) sonra 1 kere calısır
+
+        @BeforeClass :Her bir class'dan once 1 kere calısır
+        @AfterClass  :Her bir class'dan sonra 1 kere calısır
+
+        @BeforeMethod :Her bir @Test annotation'dan once 1 kere calısır. JUnit'deki karsılıgı;@Before
+        @AfterMethod :Her bir @Test annotation'dan sonra 1 kere calısır. JUnit'deki karsılıgı;@After
+        -Bu classta 6 tane @Test olusturdugumuz icin 6 kere @BeforeMethod ve 6 kere @AfterMethod goruruz
+
+    ****************
+                             Assertions
+      -Assertions are one of the main reason we use automation.
+      -After every test case we should use some kind of assertion/verification.
+      -This is kind of advanced version of if else statement
+      -
+      Her bir test case icin bir Assertion veya Verification kullanmalıyız.
+      ➢ TestNG ile iki cesit Asertion yapmak mumkundur.
+      1.	) Junit’te kullandigimiz sekilde Assert Class’indan method’lar kullanarak yapmak.
+      2.	) Junit’te olmayan, TestNG’ye ozel olarak kullanabilecegimiz SoftAssert Class’indan method’lar kullanarakyapmak
+      --------
+   ********************************
+   1.HARD ASSERT
+   Assertions
+   JUnit'te Öğrendiğimiz Assertion ile aynidir. TestNG’de soft assertion da oldugundan, ayristirmak icin bu isim kullanilmistir.
+   JUnit’ten bildigimiz uzere en çok kullandığımız 3 cesit hard assertion turu vardir
+   i. Assert.assertEquals( ) ii. Assert.assertTrue( ) iii. Assert.assertFalse( )
+   Hard assertion herhangi bir assertion FAILED olursa, test method’nun calismasini durdurur ve kalan kodlari yürütmez (stops execution).
+   Test case’in nerede FAILED olduğunu hemen anlamak ve kod’a direk mudahale etmek istenirse hard assertion tercih edilebilir.
+   --
+   2. SOFT ASSERT (VERIFICATION)
+   Assertions
+
+   SoftAssert doğrulama (verification) olarak da bilinir.
+   softAssert kullandigimizda, assert FAILED olsa bile test method’unun istediginiz kismini durdurmaz ve yürütmeye devam eder. İf else statement’da olduğu gibi.
+   Test method’unun istedigimiz bolumde yapilan tum testleri raporlar
+   Eger assertion’lardan FAILED olan varsa raporlama yapilan satirdan sonrasini calistirmaz. SoftAssert class’indaki method’lari kullanmak icin kullanabilmemiz için object olusturmamiz gerekir.
+
+     -------
+        SoftAssert objesi olustur
+            SoftAssert softAssert = new SoftAssert();
+
+            System.out.println("Line 11 Code");
+            softAssert.assertEquals(3,5); //FAILS
+            System.out.println("Line 13 Code");
+            softAssert.assertEquals("apple", "orange");  //FAILS
+            System.out.println("Line 15 Code");
+            softAssert.assertTrue(false); //FAILS
+            System.out.println("Line 17 Code");
+            softAssert.assertAll(); //Marking the test case as FAİLED or PASSED
+        }
+        /*
+        assertAll(); En sonda kullanmazsak assertAll()'i bütün assertions 'lar gecer ve fail olanı göremeyiz.
+         Bu nedenle softassertion yaparken kullanmayı unutmamalıyız.
+         *************************
+         Soft Assert vs Hard Assert
+         ● Ortak ozellikleri
+         SoftAssert ve HardAssert method’ları TestNG’den gelmektedir.
+         Kullanma amaçları farklı olsa da method’lar aynıdır.
+         ● Farklari
+         •Hard Assertion fail olursa test method’larının execute etmesi durur. Ve FAILED olarak
+         tanımlanır.
+         •Eğer softAssert FAIL olursa test method’ları execute etmeye devam eder. assertAll dedigimizde FAILED olan assertion varsa execution durur.
+            ***
+    •What is the difference between assertion and verification?
+    -Assertion means hard assertion. Verification means soft assertion. Verification is similar to if else statement.
+    -If hard assertion fails, rest of the test case stops.
+    •What is the difference between soft assert and hard assert?
+    -Hard assertion stops execution, after assertion failure. Soft assert continues to execute even after failure
+    -We need to create a soft assert object to do soft assertion
+    -assertAll() need to be used in soft assert to make the actual result
+    •Which assertion do you prefer? Why?
+    -I used both. Both assertion are useful. But I used hard assertion the most, because I need to fix the issue the moment it shows up. It usually doesn’t  make sense to wait for other tests if there is a failure.
+    -If there are lots of test cases , I prefer to use hard assert to find the wrong test case quickly to fix it.
+    -If I use soft assertion, It will run all the tests every time even there are wrong cases in them. I usually use soft assertion when I write new test cases to see if all good or some fails.
+    *************
+
+    DRIVER CLASS:
+    -singleton driver oluşturduk:
+    -create driver class => utilities packege içinde oluşturduk
+    -driver’ı açmak ,çalıştırmak ve kapatmak için kullanacağız.
+    -Olusturdugumuz Driver classta, Class ismini data type’i olarak kullanılan private variable oluştur: => private static WebDriver driver; oluşturuyoruz
+    -Bir tane public method olusturuyoruz=>” public static WebDriver getDriver(){“ methodu oluşturuyoruz.İcine drivir’ımızı ve driver.manage ile ilgili ayarlamaları yapıyoruz.
+    -Olusturdugumuz objeyi tek browser da açılacak sekilde ayarlıyoruz.
+    -” public static void closeDriver(){“ objesini oluşturuyoruz, driver’ı kapatmak icin
+
+    -  Driver.getDriver(); methodu -> driver object return eder. Driver'ı cagırmak icin:"Driver.getDriver()"=> Driver classındaki getDriver methodunu cagırarak kullanıyoruz diger sınıflarda.
+    -driver clasındaki method ve variable'lı "static" yapmamızın sebebi diger sınıflarda da rahat kullanabilmek.
+**************
+   Properties file oluşturma:
+   -Create config properties file on project level: => new => File name: configuration.properties
+   -Add important test data-url,id,...
+   *************
+               CONFIG READER CLASS
+   -Create ConfigReader class in utilities package
+   -Add important test data-url,id,...
+   -Bu class sadece configuration.properties file’ı okumak için olusturduk
+   - ConfigReader classında:=> file’ı okumak için properti objecsi olustur
+     => "static" bloc icine "configuration.properties"un pathini tanımla ve burdaki verielri okuyabilmek icin file kodlarını yaz
+     =>*Method olustur diger sınıflardan cagırıp "configuration.properties" icindekileri kolayca kullanabilmek icin:
+      public static String getProperty(String key){....
+
+   -İcindeki kodlar icin utilities package deki "ConfigReader" classına bakabiliriz.
+  SORU: "Statik" nedir nerde kullandın?
+        - ConfigReader clasında static bloc olarak kullandım
+************
+ Day17_FirstConfigTest  class
+ ***
+ POM(Page Object Model) KULLANARAK TEST YAPMAK İCİN :
+ 1-) Page package içinde test yapacağımız yerin locatelerini koymak için class oluştur. Bu classda:
+ *Constructor olustur
+      public OpenSourcePage() {
+ *  Used to initiate the page objects->
+    PageFactory.initElements(Driver.getDriver(), this);
+ NOT1: "PageFactory" seleniumdan gelir. Page object model icin kullanılan bir class'tır.
+ NOT2: "initElements()";elementleri initiate yapmak yani baslagıc degeri vermek icin,ve sayfa objeleri cagrıldıgında "nullPointerException" almamak icin kullanılır.
+  2 parametresi var;ilkine driver digerine "this" konulur
+ * PAGE OBJELERİNİ OLUSTUR;
+ JUnit’te yaptığımız böyleydi: public WebElement username = driver.findElement(By.xpath("//input[@name='username")); TRADITIONAL yani geleneksel yöntem.
+ Ama testNG’ de locate farklı oluyor: örn:
+     @FindBy(xpath = "//input[@name='username']")
+     public WebElement userName;
+ 2-) Test yapacağımız için test package’nde testini yapacağımız yere uygu isim vererek bir test classı acıyoruz. Bu classta:
+ * In test class, create page object to access the objects in the page class
+ *Page objesi oluştur locate’lerin blundugu classtaki constructor’ı kullanarak.
+ *Testini yapmak istediğimiz sayfaya gitmek için driver’ı kullanarak ve cofigReader ile configuration.properties’deki sayfaya ait url’yi al: Driver.getDriver().get(ConfigReader.getProperty("open_source_URL"));
+ *Olusturdugumuz objeyi kullanarak locate’lerin olduğu sayfadan locatelere ulaş:örn: openSourcePage.userName.sendKeys("Admin");
+***********
+      Day17_OpenSourceLogIn
+ *******
+    LoginHomework
+    TestLoginPage
+    TestHomePage
+************
+  ***UTİLİTİES PACKAGE’INE ASAGIDAKİLERİ EKLEDİK:
+     *ReusableMethods
+     *JSUtils
+     *ExcelUtils
+********************************
+  !!!!!!!!!!!!!!What is smoke test?
+  SMOKE TEST
+  *What? To make sure the application is UP and RUNNING. Testing the critical functionalities - Smoke Test nedir? : Uygulamanin stabil durumda oldugunu, ve onemli özelliklerin calisir oldugunu test edilir
+
+        -Login
+         -Checkin Checkout
+         -Add to card
+         - Make payment
+         -Sign out
+  ......
+  *How often smoke testing is done?
+              -Everyday
+                      -In early morning about 8:00 am
+  *How long does your smoke test takes to execute?
+     - Not too much - about 15 mins.
+  *How do you do smoke testing?
+  -We have a smoke test suite in our automation framework. We run it every morning
+  Smoke test suite klasorumuz var. Bu klasordeki test leri hergun calistiririz.
+  Aslinda jenkins her sabah 8 am de smoke testleri calistirir ve raporları takıma email atar. Testerlar bu raporu inceler ve fail varsa takıma email atar.
+  Virtual Machine(VM-Sanal Bilgisayar) test caselerin calismasi icin kullanilabilir.
+
+  *How many test cases are there in your smoke test suite?
+  - About 20 test case
+  *Does all of your smokes test cases automated? - Tum smoke test caseleriniz automate edilmismidir? Manual de varmidir?
+  Tum onemli test casesler automate edilmiştir.
+  -Yes we automated all smoke test cases
+  *Who decides the smoke tests?
+  -Test Lead, Sr. Automation Testers
+  ***
+  REGRESSION TEST
+  *What? Testing All major functionalities
+  -This is a comprehensive testing
+               --  Smoke Test+
+              --   Log in with different use profiles
+               --  Making payment with different payment system
+               --   Creating new user profiles
+  .....
+  *How ofter do you do regression testing?
+  -After major bug fix and before major releases
+  -When a new features added (after adding a few new features, test the application as a whole)
+  -We have release every 6 months, before each release we do regression
+  *How long does your regression takes?
+  -We have a regression suite. The automation of regression suite takes about 4-5 hours *How do you do regression testing?
+  -We have a regression test suite in our automation framework. We run is during regression testing. STOP.
+  *How many test cases are there in your regression test suite?
+  -There are about 500+ test cases in our regression suite
+  *Does all of your regression test cases automated?
+  -Almost all of them automated. There might be a few that need manual intervention that we did not automate. But I can say more than 90 percent of our regression tests cases are automated
+  *STORIES THAT I CANNOT AUTOMATE:
+  -We had some stories that is high level security, tech lead tests them because he has access. Some technical stories do not have UI or functionality that can not be automated
+  -We have some manual intervention required on some stories, than can not be automated
+  *Who decides the regression tests?
+   -Test Lead, Sr. Automation Testers
+  -Regression Team
+  *******************************
+         **Excel Setup**
+   *Poi dependency olustur - Apache poi dependencylerini pom.xml e ekleyelim: maven da poi diye ara: “Apache POI Common” ve “Apache POI API Based On OPC and OOXML Schemas” dependencylerini ekliyoruz.
+   *Java nin altinda Resources klasoru olustur :test-java => new pacakege => resources isminde dosya olustur
+   *Excel dosyasını resources’a ekle (bilgisayardaki excel dosyasını sürükle bırak . Test dataları var içinde)
+   *”utilities” package!ne ExcelUtil util classi olustur ve kodu içine yapıştır.
+
+    -ExcelUtils classı utilities packagenda
+    -Day20_ExcelLogin
+    -Day20_ExcelLogin2

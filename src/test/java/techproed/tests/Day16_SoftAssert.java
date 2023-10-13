@@ -20,7 +20,7 @@ public class Day16_SoftAssert {
         softAssert.assertAll(); //Marking the test case as FAİLED or PASSED
     }
     /*
-    assertAll(); En sonda kullanmazsak assertAll()'i pütün assertions 'lar gecer ve fail olanı göremeyiz.
+    assertAll(); En sonda kullanmazsak assertAll()'i bütün assertions 'lar gecer ve fail olanı göremeyiz.
      Bu nedenle softassertion yaparken kullanmayı unutmamalıyız.
 
      */

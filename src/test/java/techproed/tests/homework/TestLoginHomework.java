@@ -1,6 +1,5 @@
 package techproed.tests.homework;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import techproed.pages.TestHomePage;
 import techproed.pages.TestLoginPage;
@@ -8,7 +7,7 @@ import techproed.utilities.ConfigReader;
 import techproed.utilities.Driver;
 import techproed.utilities.ReusableMethods;
 
-public class LoginHomework {
+public class TestLoginHomework {
 //    https://testcenter.techproeducation.com/index.php?page=form-authentication
 //    Login the application using page object model
     @Test
