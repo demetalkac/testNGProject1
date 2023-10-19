@@ -273,3 +273,101 @@
     -ExcelUtils classı utilities packagenda
     -Day20_ExcelLogin
     -Day20_ExcelLogin2
+******************************************************************
+      **Data Provider**
+   What is data provider?
+   ****Data provider is used to get list of data
+   ****We can get data from external files, such as excel or json files
+   ****DataProvider is an annotation of testNG
+   ****I use Data Provider to get data such as credentials from excel sheet
+   ------------------------------------------------------------------------
+   How to you get data in you TestNG framework?
+   ****In Data provider method, I use @DataProvider annotation, in Test method I give the method name in the parameter
+   ------------------------------------------------------------------------
+   Data Provider has 2 parameters:
+   ****1. name : Used to give custom name for Data Provider.   @DataProvider(name = "my_smoke_data")
+   ****2. parallel : Used to do parallel testing. Default is parallel = false. We can make parallel = true
+           *************
+     1)Data Provider; bir cok veriyi Test Caselere loop kullanmadan aktarmak icin kullanılır.
+         2)Data Provider 2D array object return eder.
+         3)Data Provider testNG'den gelir
+         4)Data Provider DDT(Data Driven Testing)icin kullanılır.Birden fazla senaryoyu test caselerde test edebilmek,kullanabilmek icin kullanılır.
+         5)DataProvider teste nasıl iliskilendirilir?
+         Data Provider da 2 parametre vardır:name, parallel
+         - "name" kullanarak yapabiliriz:
+         @DataProvider annotation ile veri havuzu olusturulur.
+          @Test methodlarına bu data havuzu baglanır(@Test(dataProvider = "data provider objesinin ismi")
+
+          @DataProvider                                   @Test(dataProvider = "urunler")
+         public Object[][] urunler(){                     public void googleAramasi(String cars){
+             Object urunListesi[][] = {     ===>>>        Driver.getDriver().get("https://www.google.com");
+                     {"tesla"},.....                      .....
+
+                                   VEYA
+        - "parallel" kullanarak yapabiliriz:
+
+         @DataProvider(name = "smoke_test_data")           @Test(dataProvider = "(name = "smoke_test_data")")
+         public Object[][] urunler(){                     public void googleAramasi(String cars){
+             Object urunListesi[][] = {     ===>>>        Driver.getDriver().get("https://www.google.com");
+                     {"tesla"},.....                      .....
+*****
+  - Day21_DataProvider1 class =>  DataProvider nasıl kullanacagız var
+  -Day21_DataProvider2 class => DataProvider kullanarak, dataları test yaptıgımız sınıfa koyduk(ama bu iyi bir kullnım degil)
+  - DataProviderTestB class => excel utilitiesden data alarak  DataProvider kullandık
+  - DataProviderTestC class => DataProviderUtils classında useable method olusturup ordan data cektik
+****************************************************
+   !!!!!!!!What is TestNG.xml files?
+   An xml file that we can create to run specific test cases
+   Why do we use testNG.xml files?
+   We use it to run specific test suites such as smoke testing, some end to end testing, or regression testing.
+   Certain package, class, method
+   We can also do parallel testing with TestNG
+           ***
+   TestNG xml files
+   *XML, hem insanların hem de makinelerin okuyabileceği belgeleri kodlamak için oluşturulan bir biçimlendirme dilidir.
+   *Veri saklamak, okumak, ve farklı işletim sistemleri arasında veri transfer etmek için kullanılan .xml formatına sahip dosyalarda saklanır.
+   *Biz de framework’umuzdeki belirli testleri veya tum testleri otomatik olarak calistirmak icin xml dosyalari kullaniriz
+   TestNG xml ile ilgili tum dokumantasyon icin : https://testng.org/doc/documentation-main.html#testng-xml
+   *Testng framework’de xml dosyasi kullanma nedenlerinden biri, belirli suitleri, testleri, package lari, classları veya method lari çalıştırmaktır.
+   * Belirli testleri, package lari, classları veya method’lari dahil edebilir (include) veya hariç (exclude) tutabiliriz. Bu da bize testleri calistirmada esneklik (flexiblity) kazandirir.
+           ---
+       CREATE an testNG xml file
+  1. Right click on the project level (xml dosyasını proje seviyesinde oluşturuyoruz)
+  2. TestNG’DE XML DOSYASI OLUSTURMA:
+  A- New->file->smoketest .xml
+  B- TestNG xml plugin ile oluşturulur.Bunun için intellj’e TestNG xml plugin’ini yüklemeliyiz.
+   Yükledikten sonra xml dosyası oluşturmak istediğimiz class veye pacakage’in üstüne gel sag
+   tıkla en altta “create testng xml” çıkar ona bir kere tıkla. İntellj ekranında pop-up gibi
+   japonca bi yazı çıkar ona OK diyoruz. => poje üstüne gel sag tıkla => maven =>
+   reload project’e tıkla. Ve target’ın altında  “testng.xml”i görürüz.HER OLUSTURMADA
+   AYNI İSİM OLDUGU İCİN , XML OLUSTURDUKTAN SONRA İSMİN DEGİSTİRİYORUZ.
+   =>Acılan xml dosyasını düzenleme: Kodu sec => üstte “code” tıkla
+   => “reformat code” veya “rearrange code” a tıkla(kısa yol olarak. (CONTROL + ALT + L) - (COMMAND +OPTION + L) )
+   =>İstedigin gibi düzenle.Kaydet ve calıstır.
+  NOT: xml dosyalarını  : https://testng.org/doc/documentation-main.html#testng-xml dan alıyoruz ve kendimize gere class. Package isimlerini değiştirerek kullanıyorz)
+
+  3.<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" > , whenever we need xml file we  have to use this.
+  4. That Signature of the file got from the documentation https:// testng.org/doc/documentation-main.html
+  5. Create suite, tests, packages, classes, methods, groups etc.
+  6. When we give any path, we have to use start from the
+  package: package.(package if another exist inside).class
+  7. Save your file
+  8. xml dosyası calıstırma: Olusturdugun xml dosyasına sag tıkla =>  Run ‘a bas VEYA  acık xml dosyası içinde sag tıkla ve run et
+  9. Verbose is the level of information on the console report.
+
+    ****
+    TestNG xml files: What is it?
+    -An xml file can be used for test case groups, and do configuration. For example, pom.xml is used to add dependencies. TestNG xml files are used to create custom test groups such as class level test groups, package level test groups,...
+    -TestNG xml files are an alternative way of creating and running test cases.
+    Why did you use?
+    -I used some xml files to run tests in parallel, set test priorities, and run specific test groups
+    How did you use in your current framework?
+    -I used some xml files to run tests in parallel, set test priorities, and run specific test groups my current framework.
+    Data Provider:
+    What is it?
+    -Data provider is a testNG functionality.
+    -It is used to provide test data to the test cases in automation.
+    -It returns the data as 2D array
+    -Data provider has 2 parameters : name(to override the method name) and parallel(for doing parallel testing)
+    How did you use it?
+    -I used it when I was using testNG framework. In fact, I used data provider to get some of the test data from the excel sheet. We store the login credentials in excel and used data provider to get the data from there. The benefit was I can get multiple data without any loop.

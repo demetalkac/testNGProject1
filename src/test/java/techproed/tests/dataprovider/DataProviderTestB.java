@@ -13,7 +13,15 @@ import java.io.IOException;
 
 public class DataProviderTestB {
 
-// ===================TURKCE
+// ===================TURKCE 3.class
+
+          /*
+        -String path olustur
+        -sheet name'i al: String sheetName
+        -excel utiles classından method kullanmak icin obje olusturduk
+        -excelden aldıgım dataları bir degiskene at: "Object [][] customerCredentials ="
+        -degiskeni de return et: return customerCredentials;
+         */
 
     @DataProvider
     public Object[][] customerData(){

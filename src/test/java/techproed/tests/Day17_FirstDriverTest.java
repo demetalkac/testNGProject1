@@ -9,7 +9,7 @@ public class Day17_FirstDriverTest {
         Driver.getDriver().get("https://www.techproeducation.com");
 
 //        close the driver
-        Driver.closeDriver();
+           Driver.closeDriver();
     }
 
 }

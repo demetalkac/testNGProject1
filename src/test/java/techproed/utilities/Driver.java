@@ -39,6 +39,8 @@ public class Driver {
     private static WebDriver driver;
     //    getDriver() is used to instantiate the driver object -getDriver(), driver nesnesini başlatmak için kullanılır
     public static WebDriver getDriver(){
+
+
         if (driver==null){
             switch (ConfigReader.getProperty("browser")) {
                 case "chrome":

@@ -18,6 +18,10 @@ How to you get data in you TestNG framework?
 Data Provider has 2 parameters:
 ****1. name : Used to give custom name for Data Provider.   @DataProvider(name = "my_smoke_data")
 ****2. parallel : Used to do parallel testing. Default is parallel = false. We can make parallel = true
+
+ -Data provider merhodu olusturduk: 2D Array olusturup dataları icine koyuyoruz.
+ -anatationu kullanıyoruz: @DataProvider(name = "my_smoke_data",parallel = true)
+ -testimizi dataProvider ile iliskilendiriyoruz:@Test(dataProvider = "my_smoke_data") //parantez icine DataProvider methodunun ismini koyuyoruz
  */
 
     //    DATA PROVIDER METHOD

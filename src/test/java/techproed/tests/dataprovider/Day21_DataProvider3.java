@@ -22,6 +22,7 @@ public class Day21_DataProvider3 {
 
 //     EXCEL  DATALARI ->  DATA PROVIDER -> TEST METHODLARI
 
+
 //    TEST DATA. GET DATA FROM EXCEL
 //        PATH OF EXCEL SHEET
         String path="./src/test/java/resources/mysmoketestdata.xlsx";

@@ -8,6 +8,11 @@ public class DataProviderTestC {
 //     Bu örnekde, data provider methodumuz Util classtan gelecek
 
 /*
+
+   -Dataları “DataProvider” methodları oluşturup utilities classına koy
+   -Test yapacağımız classda @test oluştur ve bu testi ilişkilendir ve utilities clası
+   ile bag kur(extend veya obje oluşturmadan yapabilrz) : @Test(dataProvider = "musteriVerileri",dataProviderClass = DataProviderUtils.class)
+    ***
      @Test(dataProvider = "musteriVerileri") seklinde olunca dataProvider aynı classta olsaydı görecekti.Ama farklı bir
       clasta oldugu icin görmedi,bunun icin;
       "dataProviderClass" diye olan class var bunu kullanarak, olusturdugumuz "DataProviderUtils" classını görecek???
