@@ -9,8 +9,10 @@ import techproed.utilities.Driver;
 
 //USE @LISTENER ANNOTATION TO CONNECT TEST CLASS TO THE LISTENERS
 //techproed.utilities.Listeners.class -> PATH OF LISTENERS UTILITY
-@Listeners(techproed.utilities.Listeners.class)
+@Listeners(techproed.utilities.Listeners.class) // utilities ile olan "Listeners" classı ile iliskilendirdik bu yazdıgımızla.
 public class ListenersTest1 {
+
+    //NOT: Bu classda listenerslar ile ilgil methodların nasıl calıstıgınıgörmek icin olusturduk.
     @Test
     public void test1(){
         System.out.println("Test case 1 PASS");

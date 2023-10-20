@@ -370,4 +370,52 @@
     -It returns the data as 2D array
     -Data provider has 2 parameters : name(to override the method name) and parallel(for doing parallel testing)
     How did you use it?
-    -I used it when I was using testNG framework. In fact, I used data provider to get some of the test data from the excel sheet. We store the login credentials in excel and used data provider to get the data from there. The benefit was I can get multiple data without any loop.
+    -I used it when I was using testNG framework. In fact, I used data provider to get some of
+    the test data from the excel sheet. We store the login credentials in excel and used data provider to get the data from there. The benefit was I can get multiple data without any loop.
+
+*****************************************
+  LISTENERSLARIN KULLANIMI:
+  1-Listeners’ları kullanmak için utilities sınıfında “Listeners” classı oluşturduk:tekrar tekrar oluşturmamak için.
+   Classı “implements” yapıyoruz “ItestListener”e.Classın içine bilinen listeners methodlarını yazıyoruz.
+  -public void onTestFailure(ITestResult result) {  bu methodun içine screenshot methodu koyduk test fail ederse ekran
+   görüntüsü almak için.
+
+  2-Listeners package olustuduk, test yapmak için. NOT: Bu classda listenerslar ile ilgil methodların nasıl
+   calıstıgınıgörmek icin olusturduk.
+  - utilities ile olan "Listeners" classı ile iliskilendirdik bu yazdıgımızla.: @Listeners(techproed.utilities.Listeners.class)
+  - techproed.utilities.Listeners.class -> PATH OF LISTENERS UTILITY
+  -Yani testlerimizin olduğu classı ilişkilendiriyoruz utilitieste oluşturduğumuz clas ile ve testleri çalıştırınca
+  ,testlerimizin durumlarını görmüş oluyoruz.
+  - ListenersTest2 test sınıfını olusturduk bunu listeners anatitionunu kullanmadan xml dosyası
+   olusturarak ilişkilendirdik: ListenersTest2 classının üstüne gel sag tıkla “create testng xml”
+   bas,mevanı yenile,ismini degistir xml dosyasının(listeners1.xml). Xml dosyasında <süit taginden
+   sonra <listenera> tagli kodu ekle.
+  NOT: Listeners ile test claslarını 2 türlü ilişkilendirebiliyoruz:1-Listeners anatationu
+  kullanarak: @Listeners(techproed.utilities.Listeners.class)
+  2.si ise ; xml file da listeners tag’ini kullanarak yapabiliriz. İkinci yöntem daha iyi,
+  çünkü ilk yöntemde tüm sınıflara Listeners anatationunu yazmak gerek.Ama diğer türlü daha rahat
+  istediğimiz test sınıflarını ekleyebiliriz
+  < listeners>
+    <listener class-name=”techproed.utilities.Listeners"></listener>
+  </listeners>
+
+  3- Failed Test caseleri TestNG de tekrar calistirma. Testng de listenerslar ile kalan test case’simizi tekrar
+  çalıştırabiliriz. Bunu IretryAnalyzer interface’i kullanarak yapacağız.Kackere calıstıracagımızı
+   kendimiz belirleyebiliriz(maxRetryCount = 3)
+  -“ ListenersRetry” utilities classına ,eger testimiz fail olursa tekrar calıstırması için kod
+  koyduk. Ve bunu “ListenersTest4” test clasında oluşturduğumuz test ile ilişkilendirip testi
+  çalıştırdık.İliskilendirmeyi class olarak değil test case olarakyaptık:
+  @Test(retryAnalyzer = techproed.utilities.ListenersRetry.class)
+
+  4-“ ListenersRetryAnalyzer” utilities class oluşturduk “IannotationTransformer” interface’ine implement ettik.
+  Bu sınıfı tüm fail eden test caseleri otomatik olarak tekrar calıstırması için oluşturduk.
+  -Bu sınıf “ListenersRetry util” clasına bağlı calısır.
+  -Bu utilisi denemek için “ListenersTest4” classı oluşturduk ve bu classa sag tıklayarak
+  xml dosyası oluşturduk: “listeners2.xml”
+  5- Regression.xml : ListenersRetryAnalyzer ile bağladık.Regressin testine listeners ekledik.
+
+
+
+
+
+

@@ -15,12 +15,12 @@ public class Listeners implements ITestListener {  //"ITestListener" testNG'den 
  We especially use listeners for adding a special condition such as test pass, fail, or skipped
   */
     @Override
-    public void onStart(ITestContext context) {
+    public void onStart(ITestContext context) { //method icindeki parametreleri kendi ekliyor
         System.out.println("onStart - Execute ONCE before ALL tests : "+context.getName());
     }
     @Override
     public void onFinish(ITestContext context) {
-        System.out.println("onFinish - Execute ONCE after ALL tests : "+context.getName());
+        System.out.println("onFinish - Execute ONCE after ALL tests : "+context.getName()); // getName() => methodun ismini verir.
     }
     @Override
     public void onTestStart(ITestResult result) {
@@ -31,7 +31,7 @@ public class Listeners implements ITestListener {  //"ITestListener" testNG'den 
         System.out.println("onTestSuccess - Execute AFTER EACH PASSED @Test : "+result.getName());
     }
     @Override
-    public void onTestFailure(ITestResult result) {
+    public void onTestFailure(ITestResult result) { // ekran görüntüsü almak icin bu methodun icine getScreenshot()methodunu ekledik
  //       System.out.println("onTestFailure - Execute AFTER EACH FAILED @Test : "+result.getName());
         try {
             ReusableMethods.getScreenshot("TEST CASE FAILED :" + result.getName());
